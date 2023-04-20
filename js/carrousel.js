@@ -1,6 +1,5 @@
 (function(){
-    console.log('Début du carrousel')
-   let bouton = document.querySelector(".carrousel__ouvrir")
+ 
    /* -------------------------------------------------------- Variable du carrousel */
    let carrousel  = document.querySelector(".carrousel")
    let carrousel__x = document.querySelector(".carrousel__x")
@@ -18,42 +17,40 @@
    let dernier__index = -1
    let position = 0 // permet d'indexer les images de la galerie et 
 
-   /* ----------------------------------------------------  ouvrir boîte modale */
-   bouton.addEventListener('mousedown', function(){
-       console.log('ouvrir la boîte modale')
-       carrousel.classList.add('carrousel--activer')
-       ajouter_img_dans_carrousel()
-   
-   })
-   /* ----------------------------------------------------  fermer boîte modale */
-   carrousel__x.addEventListener('mousedown', function(){
-       console.log('fermer la boîte modale')
-       carrousel.classList.remove('carrousel--activer')
-   
-   })
 
-  
    /** 
     * ajouter_img_dans_carrousel
     * Ajouter l'ensemble des images de la galerie dans la boîte modale carrousel
     */
-   function ajouter_img_dans_carrousel()
+   
+   for (const elm of galerie__img)
    {
-    
-     for (const elm of galerie__img)
-     {
-      elm.dataset.index = position
-      elm.addEventListener('mousedown',function(){
-        index = this.dataset.index
-        afficher_image(index)                      
-        console.log(index)
-      })
+    elm.dataset.index = position
+    elm.addEventListener('mousedown',function(){
 
-      creation_img_carrousel(elm)
-      creation_radio_carrousel()
-     }
+      if(carrousel.classList.contains('carrousel--activer') == false){
+        carrousel.classList.add('carrousel--activer')
+      }
+      index = this.dataset.index
+      afficher_image(index)                      
+      console.log(index)
+    })
+
+    creation_img_carrousel(elm)
+    creation_radio_carrousel()
    }
+ 
 
+   
+   
+   /* ----------------------------------------------------  fermer boîte modale */
+   carrousel__x.addEventListener('mousedown', function(){
+       console.log('fermer la boîte modale')
+       carrousel.classList.remove('carrousel--activer')
+
+   })
+
+ 
    function creation_img_carrousel(elm){
 
      //console.log(elm.getAttribute('src'))
@@ -95,11 +92,19 @@
     if(dernier__index != -1){
       //carrousel__figure.children[dernier__index].style.opacity = 0
       carrousel__figure.children[dernier__index].classList.remove('carrousel__img--activer')
+      //carrousel__form.children[dernier__index].checked = false // A completer ...
     } 
     //carrousel__figure.children[this.dataset.index].style.opacity = 1
     carrousel__figure.children[index].classList.add('carrousel__img--activer')
+    
     dernier__index = index
 
 
    }
+
+   /** Permet de vérifier si la classe "carrousel--activer se trrouve dans la liste des classes du carrousel"
+    * carrousel.classList.contain('carrousel--activer')
+    */
+
+
    })()
