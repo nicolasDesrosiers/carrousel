@@ -5,6 +5,8 @@
    let carrousel__x = document.querySelector(".carrousel__x")
    let carrousel__figure = document.querySelector(".carrousel__figure")
    let carrousel__form = document.querySelector(".carrousel__form")
+   let fleche__gauche = document.querySelector(".fleche__gauche")
+   let fleche__droite = document.querySelector(".fleche__droite")
    
    /* -------------------------------------------------------- Variable de la galerie */
    let galerie = document.querySelector(".wp-block-gallery")
@@ -15,8 +17,7 @@
    
    let index = 0 
    let dernier__index = -1
-   let position = 0 // permet d'indexer les images de la galerie et 
-
+   let position = 0 // permet d'indexer les images de la galerie 
 
    /** 
     * ajouter_img_dans_carrousel
@@ -33,7 +34,7 @@
       }
       index = this.dataset.index
       afficher_image(index)                      
-      console.log(index)
+      //console.log('numero index : ', index)
     })
 
     creation_img_carrousel(elm)
@@ -45,10 +46,31 @@
    
    /* ----------------------------------------------------  fermer boîte modale */
    carrousel__x.addEventListener('mousedown', function(){
-       console.log('fermer la boîte modale')
+       //console.log('fermer la boîte modale')
        carrousel.classList.remove('carrousel--activer')
 
    })
+
+   /* ----------------------------------------------------  changer img avec fleches */
+
+   fleche__gauche.addEventListener('mousedown', function(){
+    //console.log('changer photo a gauche',index)
+      if(index == 0){
+        index = galerie__img.length-1
+      } else { index--}
+    afficher_image(index)
+   
+  })
+
+  fleche__droite.addEventListener('mousedown', function(){
+    //console.log('changer photo a droite',index)
+      if(index == galerie__img.length-1){
+        index=0
+      } else{index++}
+    
+    afficher_image(index)
+    
+  })
 
  
    function creation_img_carrousel(elm){
@@ -63,6 +85,7 @@
      
    }
 
+
    /**
     * Création d'un radio-bouton
     */
@@ -70,7 +93,7 @@
    function creation_radio_carrousel(){
 
    let rad = document.createElement('input')
-   console.log(rad.tagName)
+   //console.log(rad.tagName)
    rad.setAttribute('type', 'radio')
    rad.setAttribute('name', 'carrousel__rad')
    rad.classList.add('carrousel__rad')
@@ -82,7 +105,7 @@
 
    rad.addEventListener('mousedown', function(){
     afficher_image(index)
-    console.log(this.dataset.index)
+    //console.log('index : ',this.dataset.index)
     index = this.dataset.index
    })
    }
@@ -92,11 +115,13 @@
     if(dernier__index != -1){
       //carrousel__figure.children[dernier__index].style.opacity = 0
       carrousel__figure.children[dernier__index].classList.remove('carrousel__img--activer')
-      //carrousel__form.children[dernier__index].checked = false // A completer ...
+      carrousel__form.children[dernier__index].checked = false 
     } 
     //carrousel__figure.children[this.dataset.index].style.opacity = 1
+    //console.log(index)
+   
     carrousel__figure.children[index].classList.add('carrousel__img--activer')
-    
+    carrousel__form.children[index].checked = true
     dernier__index = index
 
 
