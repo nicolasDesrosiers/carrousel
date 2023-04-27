@@ -6,7 +6,6 @@
   left: 25%;
   border: 1px solid #444;
   background-color: black;
-  padding: 1rem;
   transform: scale(0);
   transition: transform 0.5s;
   z-index: 5;
@@ -21,7 +20,14 @@
   position: absolute;
   top: 5px;
   right: 5px;
+  padding: 0.4rem;
+  width: 2rem;
+  border: whitesmoke 1px solid;
+  border-radius: 3rem;
+  background-color: rgba(68, 68, 68, 0.7);
+  color: whitesmoke;
   z-index: 10;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .carrousel__img {
