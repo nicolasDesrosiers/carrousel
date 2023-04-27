@@ -104,9 +104,11 @@
    /** afficher image / Transition */
 
    rad.addEventListener('mousedown', function(){
+    
+    index = this.dataset.index
     afficher_image(index)
     //console.log('index : ',this.dataset.index)
-    index = this.dataset.index
+    
    })
    }
 
