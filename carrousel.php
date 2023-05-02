@@ -51,3 +51,4 @@ function genere_boite()
             </div>';
 }
 add_shortcode('carrousel', 'genere_boite');
+
